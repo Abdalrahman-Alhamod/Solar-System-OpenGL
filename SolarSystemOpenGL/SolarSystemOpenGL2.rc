@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "resource3.h"
+#include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ LANGUAGE LANG_ARABIC, SUBLANG_ARABIC_SAUDI_ARABIA
 
 1 TEXTINCLUDE 
 BEGIN
-    "resource3.h\0"
+    "resource.h\0"
 END
 
 2 TEXTINCLUDE 
