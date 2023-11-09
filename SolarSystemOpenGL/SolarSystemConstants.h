@@ -4,8 +4,8 @@
 
 // Graphics Quality Contants
 constexpr double HightQuality = 100; // Hight Graphic Quality Vlaues
-constexpr double MediumQuality = 50;	// Medium Graphic Quality Vlaues
-constexpr double LowQuality = 25;	// Low Graphic Quality Vlaues
+constexpr double MediumQuality = 40;	// Medium Graphic Quality Vlaues
+constexpr double LowQuality = 20;	// Low Graphic Quality Vlaues
 
 // projection Mode
 constexpr auto Perspective = "Perspective";	// Far obkects looks small, close object looks big, simulate human eye
