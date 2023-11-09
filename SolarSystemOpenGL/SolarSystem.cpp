@@ -20,11 +20,15 @@ bool drawOrbit = true;
 bool coloredOrbits = true;	// true => orbit color = planet color , false => orbit color = white
 bool enableKeyboardControls = true;
 auto ProjectionMode = Parallel; // Perspective , Parallel
+auto SimulationMode = Practical; // Real , Practical
 
 // Camera Veriables
 bool enableCamera = true;
 double movX, movY, movZ, lX, lY;
 double increamentValue = 1.0;
+
+// Window variables
+double windowWidth, windowHeight;
 
 void SolarSystem::loadValues() {
 	if (SimulationMode == Real) {
@@ -54,7 +58,8 @@ void SolarSystem::loadValues() {
 }
 
 void SolarSystem::loadProjection(GLsizei width, GLsizei height) {
-
+	windowWidth = width;
+	windowHeight = height;
 	if (ProjectionMode == Perspective) {
 
 		double scalar;
@@ -198,6 +203,22 @@ void SolarSystem::decodeKeyboard(bool keys[256]) {
 				ProjectionMode = Parallel;
 			else if (ProjectionMode == Parallel)
 				ProjectionMode = Perspective;
+
+			double width = windowWidth, height = windowHeight;
+			glViewport(0, 0, width, height);						// Reset The Current Viewport
+			glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
+			glLoadIdentity();									// Reset The Projection Matrix
+			// Calculate The Aspect Ratio Of The Window
+			SolarSystem().loadProjection(width, height);
+			glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
+			glLoadIdentity();
+			glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
+			glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
+			glClearDepth(1.0f);									// Depth Buffer Setup
+			glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
+			glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
+			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
+			SolarSystem().loadValues();
 		}
 		if (keys['T']) {
 			if (EarthPeriodScalar == DayPerSecond)
@@ -232,6 +253,14 @@ void SolarSystem::decodeKeyboard(bool keys[256]) {
 				increamentValue = 0.06;
 			else if (increamentValue == 0.06)
 				increamentValue = 1;
+		}
+		if (keys['M']) {
+			if (SimulationMode == Practical)
+				SimulationMode = Real;
+			else if (SimulationMode == Real)
+				SimulationMode = Practical;
+			SolarSystem().loadProjection(windowWidth, windowHeight);
+			loadValues();
 		}
 
 	}

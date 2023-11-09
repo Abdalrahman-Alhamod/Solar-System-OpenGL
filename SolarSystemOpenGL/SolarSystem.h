@@ -14,7 +14,6 @@ constexpr double slicesAndStacks = 0.5;	// Slices and Stacks values relative to 
 constexpr bool enableMouseControls = false;
 constexpr bool showControlPanel = false;
 constexpr bool showPerformancePanel = false;
-constexpr auto SimulationMode = Practical; // Real , Practical
 constexpr double FPS = 60.0;
 
 
